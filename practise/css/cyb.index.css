@@ -1,0 +1,24 @@
+html, body { background: #f0f0f0; }
+/*列表*/
+.main { padding: 0 4%; overflow-y: auto; }
+.main .otitle { padding: 10px 0; border-bottom: 1px solid #dddddd; font-size: 14px; color: #888; line-height: normal; }
+.main .list { padding: 15px 0 15px 43px; border-bottom: 1px solid #dddddd; position: relative; }
+.list .gdh_li_bad { position: absolute; top: 50%; left: 0; margin-top: -9px; border-radius: 3px; border: 1px solid #e0e0e0; width: 18px; height: 18px; background-color: #e0e0e0; }
+.list .gdh_li_choice { position: absolute; top: 50%; left: 0; margin-top: -9px; border-radius: 3px; border: 1px solid #b4b4b4; width: 18px; height: 18px; }
+.list .gdh_choiceon { border: 1px solid #c02f2d !important; background: url(../img/ico_on.png) no-repeat; background-size: 100% 100%; }
+.list .list-title { width: 100%; font-size: 14px; color: #a9a9a9; }
+.list .list-con { width: 100%; font-size: 0; }
+.list .list-con span { display: inline-block; vertical-align: top; }
+.list-con .list-id { width: 62%; }
+.list-id .list-num { display: block; font-size: 26px; color: #525252; }
+.list-id .list-time { display: block; font-size: 14px; color: #b4b4b4 }
+.list-con .list-set { width: 34%; line-height: 43px; font-size: 16px; font-weight: bold; color: #c02f2d; text-align: center; }
+.list-con .set-opened { color: #5da3f5 !important; }
+.list-con .list-state { width: 12%; line-height: 45px; font-size: 14px; color: #b3b3b3 }
+.otips { padding: 28px 0; font-size: 14px; color: #666666; }
+.nodata { border-bottom: 1px solid #dddddd; padding: 20px 0; color: #999; font-size: 14px; text-align: center; }
+/*按钮  设置*/
+.list-con .seton { cursor: pointer; border: 1px solid #409aff; padding: 12px 8px; border-radius: 3px; width: 35%; height: 31px; line-height: 31px; font-size: 14px; color: #409aff }
+/*foot*/
+.footer { position: fixed; bottom: 0px; margin: 0; border-top: 1px solid #e8e8e8; border-bottom: 1px solid #e8e8e8; width: 100%; background: #ffffff; font-size: 0; white-space: nowrap; overflow: hidden; z-index: 88; }
+.footer span { display: inline-block; padding: 16px 0; width: 100%; font-family: '微软雅黑'; font-size: 24px; color: #a4742c; letter-spacing: 1px; line-height: 28px; vertical-align: top; text-align: center; }

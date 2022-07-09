@@ -1,0 +1,243 @@
+﻿@charset "utf-8";
+
+/** 清除内外边距 **/
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */ 
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */ 
+pre, /* text formatting elements 文本格式元素 */
+ form, fieldset, legend, button, input, textarea, /* form elements 表单元素 */ 
+ th, td /* table elements 表格元素 */ {
+	margin:0;
+	padding:0;
+}
+/**
+* @ 设置默认字体 *
+* @ 这里的\5b8b\4f53就是代表宋体
+* @注释乱码：强烈建议不要用中文注释。font-family:'宋体'
+* @常用中文字体解码
+新细明体 \65B0\7EC6\660E\4F53
+细明体 \7EC6\660E\4F53
+标楷体 \6807\6977\4F53
+黑体 \9ED1\4F53
+宋体 \5B8B\4F53
+新宋体 \65B0\5B8B\4F53
+仿宋 \4EFF\5B8B
+楷体 \6977\4F53
+仿宋_GB2312 \4EFF\5B8B_GB2312
+楷体_GB2312 \6977\4F53_GB2312
+微软正黑体 \5FAE\x8F6F\6B63\9ED1\4F53
+微软雅黑 \5FAE\8F6F\96C5\9ED1
+*/
+/**,*:active,*:active,*:link{
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	-webkit-tap-highlight-color: transparent;
+	tap-highlight-color:rgba(0,0,0,0);
+	tap-highlight-color:transparent;
+	border-style:none; outline:none;
+}*/
+body{-webkit-text-size-adjust:none; /*如果文字＜12px无效*/
+	-webkit-touch-callout:none;/*禁止用户在新窗口弹出页面*/
+	-webkit-user-select:none;
+}
+body, button, input, select, textarea /* for ie */ {
+    /*font:12px/1.5 Tahoma, Arial,\5FAE\8F6F\96C5\9ED1,\5b8b\4f53, sans-serif;*/
+    font: 12px/1.5 Tahoma,Arial,\5b8b\4f53,sans-serif;
+}
+address, cite, dfn, em, b,caption,code,strong,th,var,em,i{
+	font-style:normal;
+	font-weight:normal;
+} /* 将斜体扶正 */
+code, kbd, pre, samp {
+	font-family:courier new, courier, monospace;
+} /* 统一等宽字体 */
+small {
+	font-size:0.375rem;
+} /* 小于 12px 的中文很难阅读，让 small 正常化 */
+/** 重置列表元素 **/
+ul, ol ,li,dl,dh{
+	list-style:none;
+}
+/** 重置文本格式元素 **/
+a {
+	color:#bf2c2a;
+	text-decoration:none;
+}
+a:hover {
+	
+	text-decoration:none;
+}
+sup {
+	vertical-align:text-top;
+} /* 重置，减少对行高的影响 */
+sub {
+	vertical-align:text-bottom;
+}
+a:hover,a:active, input, :focus { outline:none;}
+/** 重置表单元素 **/
+legend {
+	color:#000;
+} /* for ie6 */
+fieldset, img {
+	border:0;-ms-interpolation-mode:bicubic;
+} /* img 搭车：让链接里的 img 无边框 */
+button, input, select, textarea {
+	font-size:100%;
+} /* 使得表单元素在 ie 下能继承字体大小 */
+/* 注：optgroup 无法扶正 */
+
+/** 重置表格元素 **/
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+	word-break:break-all;
+}
+/* 重置 HTML5 元素 */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+	display:block;
+	margin:0;
+	padding:0;
+}
+mark {background:#ff0;}
+/* 遮罩层。 */
+.mask {background-color:#000;opacity:0.3;filter:alpha(opacity=30);}
+/*改变文字选中默认背景颜色*/
+::selection { background:#8DB040; color:#fff; }
+::-moz-selection { background:#8DB040; color:#fff; }
+::-webkit-selection { background:#8DB040; color:#fff; }
+
+/* 隐藏 */
+.hidden {display:none;}
+.invisible {visibility:hidden;}
+/* 清除浮动 */
+.clear:after {
+	content:'\20';
+	display:block;
+	height:0;
+	clear:both;
+}
+.clear {	*zoom:1;}
+/*行块*/
+.inlineBlock{
+	display:inline-block;
+	*display:inline;
+	*zoom:1;
+}
+/*重置盒子模型模式*/
+*{ -moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box; font-family:'Arial','\5FAE\8F6F\96C5\9ED1';}
+/*设置按钮得到光标属性显示为手型*/
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {cursor:pointer;-webkit-appearance:button; *overflow:visible}
+/*重置系统选择按钮*/
+input[type="checkbox"], input[type="radio"] { box-sizing:border-box; padding:0;}
+/*同一搜索按钮UI*/
+input[type="search"] { -webkit-appearance:textfield;}
+input[type="search"]::-webkit-search-decoration {-webkit-appearance:none}
+/*重置火狐浏览器中按钮的文字垂直对齐问题*/
+button::-moz-focus-inner, input::-moz-focus-inner { border:0; padding:0;}
+.bkw { word-break:break-all; word-wrap:break-word;overflow:hidden;}
+.ellip { text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+
+
+::-webkit-scrollbar {  
+  width:0.09375rem;  
+  height:0.09375rem;
+  border-radius:5px;
+  -webkit-border-radius:5px;
+  background:#2b2b2b;
+    display: none;
+} 
+  
+::-webkit-scrollbar-track,  
+::-webkit-scrollbar-thumb {  
+  border-radius:999px;  
+  border:3px solid transparent;  
+}  
+  
+::-webkit-scrollbar-track {  
+  box-shadow:0.03125rem 0.03125rem 0.15625rem rgba(0,0,0,0.5) inset; display:none;
+}  
+  
+::-webkit-scrollbar-thumb {  
+  min-height:0.625rem;  
+  background-clip:content-box;  
+  box-shadow:0 0 0 0.15625rem rgba(0,0,0,.2) inset;  
+}  
+  
+::-webkit-scrollbar-corner {  
+  background:transparent;  
+}
+
+
+/*--------------------  以上为项目公用BASE内容，下面区域为某个模块公用样式 ------------*/
+/*公共底部按钮*/
+#footer {
+    display: inline-block;
+    position: fixed;
+    width: 100%;
+    height: 1.28rem;
+    background-color: #fff;
+    bottom: 0;
+    left: 0;
+    /*border-top: 1px solid #d0d0d0;*/
+    line-height: 1.28rem;
+    font-size: 0;
+    white-space: nowrap;
+    z-index: 10;
+}
+/*按钮背景色*/
+    #footer .bcfe484a {
+        background: #fe484a;
+    }
+    #footer .bc25b0e8 {
+        background: #25b0e8;
+    }
+    #footer .bcededf2 {
+        background: #ededf2;
+    }
+    #footer .bcffb514 {
+        background: #ffb514;
+    }
+/*按钮字体色*/
+    #footer .cffffff {
+        color: #fff;
+    }
+    #footer .c8e8e8e {
+        color: #8e8e8e;
+    }
+/*底部一个按钮*/
+    #footer .fot-one {
+        display: inline-block;
+        width: 100%;
+        font-size: 0.4533333333333333rem;
+        line-height: 1.28rem;
+        text-align: center;
+        height: 1.28rem;
+    }
+/*底部二个按钮*/
+    #footer .fot-two {
+        display: inline-block;
+        width: 50%;
+        font-size: 0.4533333333333333rem;
+        line-height: 1.28rem;
+        text-align: center;
+        height: 1.28rem;
+    }
+    /*底部三个按钮*/
+    #footer .fot-the {
+        display: inline-block;
+        width: 33.33%;
+        font-size: 0.4533333333333333rem;
+        line-height: 1.28rem;
+        text-align: center;
+        height: 1.28rem;
+    }
+    /*底部三个按钮*/
+    #footer .fot-thep {
+        display: inline-block;
+        width: 66.66%;
+        font-size: 0.4533333333333333rem;
+        line-height: 1.28rem;
+        text-align: center;
+        height: 1.28rem;
+    }

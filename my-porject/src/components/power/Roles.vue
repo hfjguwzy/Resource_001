@@ -13,7 +13,8 @@
             <el-row :class="['bdtop bdbottom']" v-for="item1 in scope.row.children" :key="item1.id">
               <!-- 渲染一级权限 -->
               <el-col :span="5">
-                <el-tag closable @close="removeRightById(scope.row, item1.id)">{{ item1.authName }}</el-tag>
+                <el-tag closable @close="removeRightById(scope.row, item1.id)">{{ item1.authName }}
+                </el-tag>
                 <i class="el-icon-caret-right"></i><!-- 箭头小图标 -->
               </el-col>
               <!-- 渲染二级、三级权限 -->
@@ -22,14 +23,15 @@
                 <el-row :class="['bdbottom']" v-for="item2 in item1.children" :key="item2.id">
                   <!-- 渲染二级权限 -->
                   <el-col :span="5">
-                    <el-tag type="success" closable @close="removeRightById(scope.row, item2.id)">{{ item2.authName }}
+                    <el-tag type="success" closable @close="removeRightById(scope.row, item2.id)">
+                      {{ item2.authName }}
                     </el-tag>
                     <i class="el-icon-caret-right"></i><!-- 箭头小图标 -->
                   </el-col>
                   <!-- 渲染三级权限 -->
                   <el-col :span="19">
-                    <el-tag :class="['bdbottom']" type="warning" v-for="item3 in item2.children" :key="item3.id"
-                            closable @close="removeRightById(scope.row, item3.id)">
+                    <el-tag :class="['bdbottom']" type="warning" v-for="item3 in item2.children"
+                      :key="item3.id" closable @close="removeRightById(scope.row, item3.id)">
                       {{ item3.authName }}
                     </el-tag>
                   </el-col>
@@ -45,7 +47,8 @@
           <template slot-scope="scope">
             <el-button size="mini" type="primary" icon="el-icon-edit">编辑</el-button>
             <el-button size="mini" type="danger" icon="el-icon-delete">删除</el-button>
-            <el-button size="mini" type="warning" icon="el-icon-setting" @click="showSetRightDialog(scope.row)">分配权限
+            <el-button size="mini" type="warning" icon="el-icon-setting"
+              @click="showSetRightDialog(scope.row)">分配权限
             </el-button>
           </template>
         </el-table-column>
@@ -54,19 +57,23 @@
     <el-dialog title="分配权限" :visible.sync="setRightDialogVisible" width="50%">
       <!-- 树形组件 -->
       <el-tree :data="rightsList" :props="treeProps" show-checkbox default-expand-all node-key="id"
-               :default-checked-keys="defkeys" ref="treeRef">
+        :default-checked-keys="defkeys" ref="treeRef">
       </el-tree>
       <span slot="footer" class="dialog-footer">
         <el-button @click="setRightDialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="allotRights()">确 定</el-button>
       </span>
     </el-dialog>
-
   </div>
 </template>
 
 <script>
-import { getroleslist, removerightbyid } from '../../api/index';
+import {
+  getrole,
+  removerightbyid,
+  getrightslistTree,
+  setRight,
+} from "../../api/index";
 export default {
   data() {
     return {
@@ -77,13 +84,13 @@ export default {
       rightsList: [],
       //树形控件的属性绑定对象
       treeProps: {
-        label: 'authName',
-        children: 'children'
+        label: "authName",
+        children: "children",
       },
       //默认选中的权限ID数组对象
       defkeys: [],
       //当前即将分配权限的角色ID
-      roleId: ''
+      roleId: "",
     };
   },
   created() {
@@ -91,7 +98,7 @@ export default {
   },
   methods: {
     async getRolesList() {
-      const res = await getroleslist();
+      const res = await getrole();
       if (res) {
         this.rolesList = res.data;
       }
@@ -103,30 +110,33 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
-      })
-        .then(async () => {
+      }).then(
+        async () => {
           const res = await removerightbyid(role.id, rightId);
           if (res) {
             // 获取服务器返回的当前角色的最新权限数据，然后赋值给原来的角色对象
             role.children = res.data;
           }
-        }, () => { this.$message({ type: "info", message: "已取消删除" }); })
+        },
+        () => {
+          this.$message({ type: "info", message: "已取消删除" });
+        }
+      );
     },
     //展示权限分配的对话框
     async showSetRightDialog(role) {
       this.roleId = role.id;
-      //获取所有权限的数据
-      const { data: res } = await this.$http.get('rights/tree');
-      if (res.meta.status !== 200) {
-        return this.$message.error('获取权限数据失败！');
-      }
-      //把获取到的权限数据保存到data中
-      this.rightsList = res.data;
-      //递归获取三级节点的ID
-      this.defkeys = [];//清空数组
-      this.getLeafKeys(role, this.defkeys);
       //显示对话框
       this.setRightDialogVisible = true;
+      //获取所有权限的数据
+      const res = await getrightslistTree();
+      if (res) {
+        //把获取到的权限数据保存到data中
+        this.rightsList = res.data;
+        //递归获取三级节点的ID
+        this.defkeys = []; //清空数组
+        this.getLeafKeys(role, this.defkeys);
+      }
     },
     //获取角色下的三级权限ID(通过递归)，保存到defkeys数组
     getLeafKeys(node, arr) {
@@ -134,26 +144,25 @@ export default {
       if (!node.children) {
         return arr.push(node.id);
       }
-      node.children.forEach(item => this.getLeafKeys(item, arr));
+      node.children.forEach((item) => this.getLeafKeys(item, arr));
     },
     //点击为角色分配权限
     async allotRights() {
       //"..."为“展开运算符”，将一个数组转为用逗号分隔的参数序列
       const keys = [
         ...this.$refs.treeRef.getCheckedKeys(),
-        ...this.$refs.treeRef.getHalfCheckedKeys()
-      ]
+        ...this.$refs.treeRef.getHalfCheckedKeys(),
+      ];
       const idStr = keys.join(",");
-      const { data: res } = await this.$http.post('roles/' + this.roleId + '/rights', { rids: idStr });
-      if (res.meta.status !== 200) {
-        return this.$message.error('分配权限失败！');
+      const res = await setRight(this.roleId, { rids: idStr });
+      if (res) {
+        this.$message.success("分配权限成功！");
+        //重新刷新角色列表
+        this.getRolesList();
+        //关闭对话框
+        this.setRightDialogVisible = false;
       }
-      this.$message.success('分配权限成功！');
-      //重新刷新角色列表
-      this.getRolesList();
-      //关闭对话框
-      this.setRightDialogVisible = false;
-    }
+    },
   },
 };
 </script>

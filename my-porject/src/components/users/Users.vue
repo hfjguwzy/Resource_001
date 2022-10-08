@@ -38,37 +38,42 @@
         <el-table-column label="操作" width="200px">
           <template slot-scope="scope">
             <el-tooltip effect="dark" content="修改" placement="top-end">
-              <el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditDialog(scope.row.id)">
+              <el-button type="primary" icon="el-icon-edit" size="mini"
+                @click="showEditDialog(scope.row.id)">
               </el-button>
             </el-tooltip>
             <el-tooltip effect="dark" content="删除" placement="top">
-              <el-button type="danger" icon="el-icon-delete" size="mini" @click="removeUserById(scope.row.id)">
+              <el-button type="danger" icon="el-icon-delete" size="mini"
+                @click="removeUserById(scope.row.id)">
               </el-button>
             </el-tooltip>
             <el-tooltip effect="dark" content="分配角色" placement="top-start">
-              <el-button type="warning" icon="el-icon-setting" size="mini" @click="setRole(scope.row)"></el-button>
+              <el-button type="warning" icon="el-icon-setting" size="mini"
+                @click="setRole(scope.row)"></el-button>
             </el-tooltip>
           </template>
         </el-table-column>
       </el-table>
       <!-- 分页区 -->
       <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
-                     :current-page="queryInfo.pagenum" :page-sizes="[1, 2, 5, 10]" :page-size="queryInfo.pagesize"
-                     layout="total, sizes, prev, pager, next, jumper" :total="total">
+        :current-page="queryInfo.pagenum" :page-sizes="[1, 2, 5, 10]"
+        :page-size="queryInfo.pagesize" layout="total, sizes, prev, pager, next, jumper"
+        :total="total">
       </el-pagination>
     </el-card>
 
     <!-- 用于 添加用户 的对话框 -->
     <el-dialog title="添加用户" :visible.sync="addDialogVisible" width="50%" @close="addDialogClosed"
-               :close-on-click-modal="false">
+      :close-on-click-modal="false">
       <!-- 添加用户表单区 -->
-      <el-form :model="addUserForm" status-icon :rules="addUserFormRules" ref="addUserFormRef" label-width="100px"
-               class="demo-ruleForm">
+      <el-form :model="addUserForm" status-icon :rules="addUserFormRules" ref="addUserFormRef"
+        label-width="100px" class="demo-ruleForm">
         <el-form-item label="用户名" prop="username">
           <el-input v-model="addUserForm.username" autocomplete="off" clearable></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input type="password" v-model="addUserForm.password" autocomplete="off" show-password clearable>
+          <el-input type="password" v-model="addUserForm.password" autocomplete="off" show-password
+            clearable>
           </el-input>
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
@@ -87,9 +92,10 @@
 
     <!-- 用于 修改用户属性 的对话框 -->
     <el-dialog title="修改用户" :visible.sync="editDialogVisible" width="50%" @close="editDialogClosed"
-               :close-on-click-modal="false">
+      :close-on-click-modal="false">
       <!-- 内容主体区 -->
-      <el-form :model="editUserForm" :rules="editUserFormRules" ref="editUserFormRef" label-width="70px">
+      <el-form :model="editUserForm" :rules="editUserFormRules" ref="editUserFormRef"
+        label-width="70px">
         <el-form-item label="用户名" prop="username">
           <el-input v-model="editUserForm.username" disabled></el-input>
         </el-form-item>
@@ -114,7 +120,8 @@
         <p>当前的角色：{{userInfo.role_name}}</p>
         <p>分配新角色：
           <el-select v-model="selectRoleId" placeholder="请选择">
-            <el-option v-for="item in roleList" :key="item.id" :label="item.roleName" :value="item.id">
+            <el-option v-for="item in roleList" :key="item.id" :label="item.roleName"
+              :value="item.id">
             </el-option>
           </el-select>
         </p>
@@ -217,13 +224,13 @@ export default {
     },
     //监听 pagesize 改变的事件
     handleSizeChange(newSize) {
-      console.log(newSize);
+      console.log('当前选中的页面最大条数为：',newSize);
       this.queryInfo.pagesize = newSize; //重新指定每页数据量
       this.getUsersList(); //带着新的分页请求获取数据
     },
     //监听 页码值 改变的事件
     handleCurrentChange(newPage) {
-      console.log(newPage);
+      console.log('当前选中的页数为：',newPage);
       this.queryInfo.pagenum = newPage; //重新指定当前页
       this.getUsersList(); //带着新的分页请求获取数据
     },
@@ -287,7 +294,7 @@ export default {
         cancelButtonText: "取消",
         type: "warning",
       })
-        .then(async() => {
+        .then(async () => {
           const res = await removeuser(id);
           if (res) {
             this.$message.success(res.meta.msg);
@@ -297,7 +304,7 @@ export default {
     },
     //展示分配角色的对话框
     async setRole(user) {
-      const res = getrole();
+      const res = await getrole();
       if (res) {
         this.roleList = res.data;
         this.userInfo = user;//获取用户信息展示在页面

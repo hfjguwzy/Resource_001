@@ -79,18 +79,18 @@ export function changerole(userid,selectid){
     }
   })
 }
-// 获取权限列表
-export function getrightslist(){
+// 获取权限列表(树形)
+export function getrightslistTree(){
+  return request({
+    method:'get',
+    url:'rights/tree',
+  })
+}
+// 获取权限列表(列表)
+export function getrightslistList(){
   return request({
     method:'get',
     url:'rights/list',
-  })
-}
-// 获取角色列表
-export function getroleslist(){
-  return request({
-    method:'get',
-    url:'roles',
   })
 }
 //通过id删除角色权限
@@ -98,5 +98,13 @@ export function removerightbyid(roleid,rightid){
   return request({
     method:'delete',
     url:`roles/ ${roleid}/rights/${rightid}`,
+  })
+}
+// 角色授权
+export function setRight(roleid,parameter){
+  return request({
+    method:'post',
+    url:`roles/ ${roleid}/rights/`,
+    data:parameter,
   })
 }

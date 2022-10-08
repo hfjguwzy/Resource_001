@@ -26,7 +26,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response) => {
     console.log("响应拦截器(成功时)", response);
-    if (response.data.meta.status !== 200 && 201 && 204) {
+    if (response.status !== 200) {
       Message({
         type: 'error',
         message: response.data.meta.msg,

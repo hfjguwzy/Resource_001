@@ -26,7 +26,7 @@
 </template>
 
 <script> 
-import { getrightslist } from '../../api/index';
+import { getrightslistList } from '../../api/index';
 export default {
   data() {
     return {
@@ -40,7 +40,7 @@ export default {
   methods: {
     //获取权限列表
     getRightsList() {
-      getrightslist().then((res) => {
+      getrightslistList().then((res) => {
         if (res) {
           this.rightsList = res.data;
         }

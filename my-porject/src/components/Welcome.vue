@@ -1,6 +1,10 @@
 <template>
   <div>
+<<<<<<< HEAD
     欢迎来到首页 master
+=======
+    欢迎来到首页 wzy-dev
+>>>>>>> wzy-dev
     <Mermaid></Mermaid>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    欢迎来到首页
+    欢迎来到首页 你好
     <Mermaid></Mermaid>
   </div>
 </template>
